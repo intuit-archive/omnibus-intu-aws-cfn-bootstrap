@@ -1,0 +1,9 @@
+#!/bin/bash
+#
+# Perform necessary aws-cfn-bootstrap removal steps
+# after package is uninstalled.
+#
+
+if [ "$1" = "0" ]; then
+  rm -rf "/opt/aws/intu-aws-cfn-bootstrap"
+fi
