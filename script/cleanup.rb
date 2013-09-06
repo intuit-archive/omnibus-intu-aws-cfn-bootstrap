@@ -19,7 +19,7 @@ compute.servers.each do |s|
 
   if name == target_name && state == "running"
     puts "Destroying '#{id}'"
-    s.destroy
+#    s.destroy
   end
 
 end
