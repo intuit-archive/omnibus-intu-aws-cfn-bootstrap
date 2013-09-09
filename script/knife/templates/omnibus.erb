@@ -33,8 +33,11 @@ git clone --quiet https://github.com/intuit/omnibus-intu-aws-cfn-bootstrap.git  
 # Change directory to build cloned repo
 cd /var/tmp/omnibus-intu-aws-cfn-bootstrap
 
-# Use appropriate build branch
-git checkout --track <%= "#{ENV['GIT_BRANCH']}" %>
+# Use appropriate build branch if passed via Jenkins UI
+branch=<%= "#{ENV['GIT_BRANCH']}" %>
+if [ -n "$branch" ];then
+  git checkout --track origin/${branch}
+fi
 
 # Install Bundle
 bundle install --quiet --binstubs
