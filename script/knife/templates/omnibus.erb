@@ -1,6 +1,6 @@
 bash -c '
 # Exit On Error
-set -e
+set -ex
 
 # Add Intu Repo (For Ruby and S3cmd RPMs)
 cat > /etc/yum.repos.d/intu-packages-us-west-1.repo << EOS
@@ -31,6 +31,9 @@ cd /var/tmp/omnibus-intu-aws-cfn-bootstrap
 
 # Install Bundle
 bundle install --quiet --binstubs
+
+# Use appropriate build branch
+git checkout --track <%= "#{ENV['GIT_BRANCH']}" %>
 
 # Build  RPM
 bin/omnibus build project intu-aws-cfn-bootstrap
