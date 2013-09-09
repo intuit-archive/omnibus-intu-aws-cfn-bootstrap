@@ -1,5 +1,5 @@
 name "python"
-version "3.3.0"
+version "2.7.3"
 
 source :url => "http://python.org/ftp/python/2.7.3/Python-2.7.3.tgz",
        :md5 => "2cf641732ac23b18d139be077bd906cd"
