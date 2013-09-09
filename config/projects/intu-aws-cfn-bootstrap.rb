@@ -1,5 +1,5 @@
 name            "intu-aws-cfn-bootstrap"
-maintainer      "kevin_young@intuit.com"
+maintainer      "Intuit, Inc."
 homepage        "http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-helper-scripts-reference.html"
 
 build_version   ENV['version']
