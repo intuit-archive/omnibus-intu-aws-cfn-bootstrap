@@ -1,5 +1,5 @@
 name "intu-aws-cfn-bootstrap"
-version "1.3"
+version ENV['version']
 
 dependencies ["openssl", "python", "virtualenv"]
 

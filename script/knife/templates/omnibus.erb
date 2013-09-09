@@ -1,6 +1,6 @@
 bash -c '
 # Exit On Error
-set -ex
+set -e
 
 # Add Intu Repo (For Ruby and S3cmd RPMs)
 cat > /etc/yum.repos.d/intu-packages-us-west-1.repo << EOS
@@ -17,6 +17,10 @@ access_key = <%= "#{ENV['AWS_ACCESS_KEY_ID']}" %>
 secret_key = <%= "#{ENV['AWS_SECRET_ACCESS_KEY']}" %>
 EOS
 
+# Set version for build
+export version=<%= "#{ENV['version']}" %>
+export iteration=<%= "#{ENV['iteration']}" %>
+
 # Install Required RPMs
 yum install -y --quiet intu-ruby git s3cmd rpm-build  python-setuptools
 
@@ -29,11 +33,11 @@ git clone --quiet https://github.com/intuit/omnibus-intu-aws-cfn-bootstrap.git  
 # Change directory to build cloned repo
 cd /var/tmp/omnibus-intu-aws-cfn-bootstrap
 
-# Install Bundle
-bundle install --quiet --binstubs
-
 # Use appropriate build branch
 git checkout --track <%= "#{ENV['GIT_BRANCH']}" %>
+
+# Install Bundle
+bundle install --quiet --binstubs
 
 # Build  RPM
 bin/omnibus build project intu-aws-cfn-bootstrap
