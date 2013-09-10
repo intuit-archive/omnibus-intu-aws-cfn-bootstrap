@@ -10,7 +10,7 @@ To build the intu-aws-cfn-bootstrap RPM on the local system:
 	gem install bundler -v 1.2.2 --no-ri --no-rdoc --quiet
 	git clone --quiet https://github.com/intuit/omnibus-intu-aws-cfn-bootstrap.git /var/tmp/omnibus-intu-aws-cfn-bootstrap
 	cd /var/tmp/omnibus-intu-aws-cfn-bootstrap
-	bundle install --quiet
+	bundle install --quiet --binstubs
 	bin/omnibus build project intu-aws-cfn-bootstrap
 
 ## Continuous Integration
