@@ -1,0 +1,17 @@
+#!/bin/bash
+#
+# Perform necessary aws-cfn-bootstrap removal steps
+# before package is uninstalled.
+#
+
+# Uninstall: 
+if [ "$1" = "0" ]; then
+    #Clean up the symlinks if it points to this version
+    cd /opt/aws/intu-aws-cfn-bootstrap/bin
+    for command in cfn*; do
+        unlink /usr/bin/$command
+        unlink /opt/aws/bin/$command
+    done
+    
+    unlink /etc/init.d/cfn-hup
+fi
