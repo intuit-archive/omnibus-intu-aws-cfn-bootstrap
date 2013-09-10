@@ -1,0 +1,53 @@
+#!/bin/bash
+#
+# Perform necessary aws-cfn-bootstrap setup steps
+# after package is installed.
+#
+
+PROGNAME=$(basename $0)
+
+function error_exit
+{
+  echo "${PROGNAME}: ${1:-"Unknown Error"}" 1>&2
+  exit 1
+}
+# post install rpm script
+
+# Upgrade- remove old symlink
+if [ "$1" = "2" ]; then
+    /bin/rm -f /opt/aws/intu-aws-cfn-bootstrap/apitools/cfn-init
+    # also remove old init script if it exists
+    if [ -e  /etc/rc.d/init.d/cfn-hup ]; then
+        /bin/rm -f  /etc/rc.d/init.d/cfn-hup
+    fi
+fi
+
+# Install/Upgrade - Create symlink from versioned
+# directory to product name directory if it doesn't exist
+
+# Create aws bin directory if it doesn't exist:
+if [ ! -d /opt/aws/bin ]; then
+    /bin/mkdir /opt/aws/bin
+fi
+
+for command in /opt/aws/intu-aws-cfn-bootstrap/bin/cfn*; do
+    if [ -e /opt/aws/intu-aws-cfn-bootstrap/bin/$(basename $command) ]; then
+        if [ "$1" = "2" ]; then
+            # Upgrade- remove old symlinks
+            /bin/rm -f /opt/aws/bin/$(basename $command)
+        fi
+    fi
+    if [ ! -h /opt/aws/bin/$(basename $command) ]; then
+    # Install relative symlink from generic directory to aws shared directory
+        ln -sf ../intu-aws-cfn-bootstrap/bin/$(basename $command)  /opt/aws/bin/$(basename $command)
+        ln -sf /opt/aws/bin/$(basename $command)  /usr/bin/$(basename $command)
+    fi
+done
+
+# Create link to init script
+if [ ! -e /etc/rc.d/init.d/cfn-hup ]; then
+    ln -sf /opt/aws/bin/cfn-hup  /etc/rc.d/init.d/cfn-hup
+fi
+
+/bin/chmod 755 /etc/rc.d/init.d/cfn-hup
+/bin/chmod 755 /opt/aws/intu-aws-cfn-bootstrap/bin/cfn-hup

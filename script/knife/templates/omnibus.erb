@@ -1,0 +1,53 @@
+bash -c '
+# Exit On Error
+set -e
+
+# Add Intu Repo (For Ruby and S3cmd RPMs)
+cat > /etc/yum.repos.d/intu-packages-us-west-1.repo << EOS
+[intu-packages-us-west-1]
+name=Intuit Custom RPM Packages
+baseurl=http://s3-us-west-1.amazonaws.com/intu-packages-us-west-1/rhel/6/x86_64
+gpgcheck=0
+enabled=1
+EOS
+
+# Create s3cfg file
+cat > /root/.s3cfg << EOS
+access_key = <%= "#{ENV['AWS_ACCESS_KEY_ID']}" %>
+secret_key = <%= "#{ENV['AWS_SECRET_ACCESS_KEY']}" %>
+EOS
+
+# Set version for build
+export version=<%= "#{ENV['version']}" %>
+export iteration=<%= "#{ENV['iteration']}" %>
+
+# Install Required RPMs
+yum install -y --quiet intu-ruby git s3cmd rpm-build  python-setuptools
+
+# Install bundler gem
+gem install bundler -v 1.2.2 --no-ri --no-rdoc --quiet
+
+# Clone The Repo
+git clone --quiet https://github.com/intuit/omnibus-intu-aws-cfn-bootstrap.git  /var/tmp/omnibus-intu-aws-cfn-bootstrap
+
+# Change directory to build cloned repo
+cd /var/tmp/omnibus-intu-aws-cfn-bootstrap
+
+# Use appropriate build branch if passed via Jenkins UI
+branch=<%= "#{ENV['GIT_BRANCH']}" %>
+if [ -n "$branch" ];then
+  git checkout --track origin/${branch}
+fi
+
+# Install Bundle
+bundle install --quiet --binstubs
+
+# Build  RPM
+bin/omnibus build project intu-aws-cfn-bootstrap
+
+# Upload RPM to Omnibus package bucket
+for rpm in $(ls -d ./pkg/intu-aws-cfn-bootstrap*.rpm); do
+  echo "Upload $rpm to s3://intu-omnibus-packages-us-west-1"
+  s3cmd --no-progress sync $rpm s3://intu-omnibus-packages-us-west-1/
+done
+'
