@@ -14,15 +14,6 @@ rvm install ruby-$RUBY_VERSION --disable-binary --verify-downloads 1
 # Set ruby / gemset
 rvm use $RUBY_VERSION@omnibus-heirloom --create
 
-# Build, upload and authorize artifact
-gem install heirloom -v 0.11.2 --no-ri --no-rdoc
-
-# Install simple deploy gem
-gem install simple_deploy -v 0.7.4 --no-ri --no-rdoc
-
-# Install sdbport gem
-gem install sdbport -v 0.4.1 --no-ri --no-rdoc
-
 # Reload RVM to fix Seg Fault that was going to drive Weaver instance
 rvm reload
 
