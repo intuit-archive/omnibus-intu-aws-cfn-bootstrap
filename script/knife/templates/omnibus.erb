@@ -47,7 +47,7 @@ bin/omnibus build project intu-aws-cfn-bootstrap
 
 # Upload RPM to Omnibus package bucket
 for rpm in $(ls -d ./pkg/intu-aws-cfn-bootstrap*.rpm); do
-  echo "Upload $rpm to s3://intu-omnibus-packages-us-west-1"
-  s3cmd --no-progress sync $rpm s3://intu-omnibus-packages-us-west-1/
+  echo "Upload $rpm to s3://intu-cap-omnibus-packages-us-west-1"
+  s3cmd --no-progress sync $rpm s3://intu-cap-omnibus-packages-us-west-1/
 done
 '
