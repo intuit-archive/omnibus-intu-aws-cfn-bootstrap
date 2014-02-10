@@ -4,9 +4,7 @@ version ENV['version']
 dependencies ["openssl", "python", "virtualenv"]
 
 build do
-  command "if rpm -qa|grep aws-cfn-bootstrap;then rpm -e --quiet `rpm -qa --queryformat '%{name}\n'|grep aws-cfn-bootstrap`;fi"
-  command "source #{install_dir}/bin/activate"
-  command "easy_install requests"
-  command "easy_install python-daemon"
-  command "easy_install https://s3.amazonaws.com/cloudformation-examples/aws-cfn-bootstrap-latest.tar.gz"
+  command ". #{install_dir}/bin/activate; pip install -v --install-option='--prefix=#{install_dir}' requests==2.2.1"
+  command ". #{install_dir}/bin/activate; pip install -v --install-option='--prefix=#{install_dir}' python-daemon==1.6"
+  command ". #{install_dir}/bin/activate; pip install -v --install-option='--prefix=#{install_dir}' https://s3.amazonaws.com/cloudformation-examples/aws-cfn-bootstrap-latest.tar.gz"
 end
