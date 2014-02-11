@@ -25,7 +25,7 @@ export iteration=<%= "#{ENV['iteration']}" %>
 yum install -y --quiet intu-ruby git s3cmd rpm-build  python-setuptools
 
 # Install bundler gem
-gem install bundler -v 1.2.2 --no-ri --no-rdoc --quiet
+gem install bundler -v 1.5.3 --no-ri --no-rdoc --quiet
 
 # Clone The Repo
 git clone --quiet https://github.com/intuit/omnibus-intu-aws-cfn-bootstrap.git  /var/tmp/omnibus-intu-aws-cfn-bootstrap
