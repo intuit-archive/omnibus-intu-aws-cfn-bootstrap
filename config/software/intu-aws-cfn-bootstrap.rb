@@ -1,7 +1,9 @@
 name "intu-aws-cfn-bootstrap"
-default_version ENV['version']
+version ENV['version']
 
-dependencies ["openssl", "python", "virtualenv"]
+dependency "openssl"
+dependency "python"
+dependency "virtualenv"]
 
 pip_install_list = ["/tmp/aws-cfn-bootstrap-latest.tar.gz"]
 

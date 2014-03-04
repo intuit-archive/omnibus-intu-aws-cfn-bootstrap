@@ -7,7 +7,7 @@ build_iteration ENV['iteration']
 
 install_path    "/opt/aws/intu-aws-cfn-bootstrap"
 
-dependencies    ["preparation","intu-aws-cfn-bootstrap"]
+dependency      "preparation"
 
 exclude         "\.git*"
 exclude         "bundler\/git"
