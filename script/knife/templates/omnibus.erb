@@ -22,7 +22,8 @@ export version=<%= "#{ENV['version']}" %>
 export iteration=<%= "#{ENV['iteration']}" %>
 
 # Install Required RPMs
-yum install -y --quiet intu-ruby git s3cmd rpm-build  python-setuptools
+yum -y -e ruby rubygems
+yum install -y intu-ruby git s3cmd rpm-build
 
 # Install bundler gem
 gem install bundler -v 1.5.3 --no-ri --no-rdoc --quiet
