@@ -38,8 +38,7 @@ knife ec2 server create -c ./script/knife/config/knife.rb \
                         --groups=build \
                         --node-name='intu-aws-cfn-bootstrap-omnibus-build'
 if [ $? -ne 0 ]; then
-#  clean_up_and_exit 1
-echo This is a test clean_up
+  clean_up_and_exit 1
 fi
 
-#clean_up_and_exit 0
+clean_up_and_exit 0
