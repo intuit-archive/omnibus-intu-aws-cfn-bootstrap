@@ -29,8 +29,6 @@ gem install bundler -v 1.5.3 --no-ri --no-rdoc --quiet
 
 # Clone The Repo
 git clone --quiet https://github.com/intuit/omnibus-intu-aws-cfn-bootstrap.git  /var/tmp/omnibus-intu-aws-cfn-bootstrap
-cp /var/tmp/omnibus-intu-aws-cfn-bootstrap/script/aws-cfn-bootstrap-latest.tar.gz /tmp
-
 # Change directory to build cloned repo
 cd /var/tmp/omnibus-intu-aws-cfn-bootstrap
 
@@ -39,6 +37,8 @@ branch=<%= "#{ENV['GIT_BRANCH']}" %>
 if [ -n "$branch" ] && [ "$branch" != "master" ];then
   git checkout --track origin/${branch}
 fi
+
+cp /var/tmp/omnibus-intu-aws-cfn-bootstrap/script/aws-cfn-bootstrap-latest.tar.gz /tmp
 
 # Install Bundle
 bundle install --quiet --binstubs
