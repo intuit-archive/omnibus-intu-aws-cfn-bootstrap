@@ -3,7 +3,7 @@ version ENV['version']
 
 dependency "openssl"
 dependency "python"
-dependency "virtualenv"]
+dependency "virtualenv"
 
 pip_install_list = ["/tmp/aws-cfn-bootstrap-latest.tar.gz"]
 
