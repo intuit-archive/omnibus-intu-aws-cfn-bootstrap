@@ -2,6 +2,7 @@ name "intu-aws-cfn-bootstrap"
 version ENV['version']
 
 dependency "openssl"
+dependency "gdm"
 dependency "python"
 dependency "virtualenv"
 
