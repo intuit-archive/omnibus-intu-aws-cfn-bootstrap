@@ -24,6 +24,7 @@ export iteration=<%= "#{ENV['iteration']}" %>
 # Install Required RPMs
 rpm -e ruby-irb ruby-rdoc ruby rubygems
 yum install -y intu-ruby intu-rubygems libffi-devel gcc git s3cmd rpm-build
+rpm -e libdb-devel
 
 # Install bundler gem
 gem install bundler -v 1.5.3 --no-ri --no-rdoc --quiet
