@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
 
-gem 'omnibus', '1.2.0'
-gem 'omnibus-software', :git => 'git://github.com/opscode/omnibus-software.git', :ref => '3d9d097332199fdafc3237c0ec11fcd784c11b4d'
+gem 'omnibus', '2.0.0.rc1'
+gem 'omnibus-software', :git => 'git://github.com/opscode/omnibus-software.git', :ref => '7564c88163abf3b794b9eca0a93a9c686ec7d095'
