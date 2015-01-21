@@ -1,5 +1,7 @@
 ## omnibus-intu-aws-cfn-bootstrap
 
+**!!! This project has been deprecated. We recommend you fork it or look for an alternative solution. !!!**
+
 This contains the skeleton for building Omnibus intu-aws-cfn-bootstrap package.
 
 ## Build
